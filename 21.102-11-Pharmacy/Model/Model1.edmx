@@ -1,0 +1,765 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="Хранилище PharmacyModel" Provider="Devart.Data.PostgreSql" ProviderManifestToken="PostgreSQL, 16.2.0" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="clients">
+          <Key>
+            <PropertyRef Name="client_id" />
+          </Key>
+          <Property Name="client_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="user_id" Type="int" />
+          <Property Name="name" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="surname" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="patronymic" Type="varchar" MaxLength="50" />
+          <Property Name="contact_info" Type="varchar" MaxLength="100" Nullable="false" />
+        </EntityType>
+        <EntityType Name="deliveries">
+          <Key>
+            <PropertyRef Name="delivery_id" />
+          </Key>
+          <Property Name="delivery_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="supplier_id" Type="int" Nullable="false" />
+          <Property Name="delivery_date" Type="date" Nullable="false" />
+        </EntityType>
+        <EntityType Name="employees">
+          <Key>
+            <PropertyRef Name="employee_id" />
+          </Key>
+          <Property Name="employee_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="user_id" Type="int" Nullable="false" />
+          <Property Name="name" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="surname" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="patronymic" Type="varchar" MaxLength="50" />
+          <Property Name="position_id" Type="int" Nullable="false" />
+          <Property Name="phone_number" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="passport_series" Type="varchar" MaxLength="4" Nullable="false" />
+          <Property Name="passport_number" Type="varchar" MaxLength="6" Nullable="false" />
+        </EntityType>
+        <EntityType Name="orderdetails">
+          <Key>
+            <PropertyRef Name="order_id" />
+            <PropertyRef Name="product_id" />
+          </Key>
+          <Property Name="order_id" Type="int" Nullable="false" />
+          <Property Name="product_id" Type="int" Nullable="false" />
+          <Property Name="quantity" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="orders">
+          <Key>
+            <PropertyRef Name="order_id" />
+          </Key>
+          <Property Name="order_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="client_id" Type="int" Nullable="false" />
+          <Property Name="status" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="delivery_date" Type="date" Nullable="false" />
+          <Property Name="pickup_location" Type="varchar" MaxLength="100" />
+          <Property Name="order_date" Type="date" Nullable="false" />
+          <Property Name="order_code" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="total_amount" Type="money" />
+        </EntityType>
+        <EntityType Name="pharmacyproducts">
+          <Key>
+            <PropertyRef Name="product_id" />
+          </Key>
+          <Property Name="product_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="article_number" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="name" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="description" Type="text" Nullable="false" />
+          <Property Name="category" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="image_url" Type="varchar" MaxLength="255" />
+          <Property Name="manufacturer" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="price" Type="money" Nullable="false" />
+          <Property Name="discount" Type="numeric" Precision="5" Scale="2" />
+          <Property Name="stock_quantity" Type="int" />
+          <Property Name="status" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="unit_of_measurement" Type="varchar" MaxLength="50" />
+          <Property Name="quantity_per_pack" Type="int" />
+        </EntityType>
+        <EntityType Name="positions">
+          <Key>
+            <PropertyRef Name="position_id" />
+          </Key>
+          <Property Name="position_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="position_name" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="education_qualification" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="salary" Type="money" Nullable="false" />
+        </EntityType>
+        <EntityType Name="roles">
+          <Key>
+            <PropertyRef Name="role_id" />
+          </Key>
+          <Property Name="role_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="role_name" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="supplierdeliveries">
+          <Key>
+            <PropertyRef Name="delivery_id" />
+            <PropertyRef Name="product_id" />
+          </Key>
+          <Property Name="delivery_id" Type="int" Nullable="false" />
+          <Property Name="product_id" Type="int" Nullable="false" />
+          <Property Name="quantity" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="suppliers">
+          <Key>
+            <PropertyRef Name="supplier_id" />
+          </Key>
+          <Property Name="supplier_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="address" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="phone_number" Type="varchar" MaxLength="20" Nullable="false" />
+        </EntityType>
+        <EntityType Name="users">
+          <Key>
+            <PropertyRef Name="user_id" />
+          </Key>
+          <Property Name="user_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="login" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="password" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="role_id" Type="int" Nullable="false" />
+        </EntityType>
+        <Association Name="public_clients_user_id_fkey">
+          <End Role="users" Type="Self.users" Multiplicity="0..1" />
+          <End Role="clients" Type="Self.clients" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="users">
+              <PropertyRef Name="user_id" />
+            </Principal>
+            <Dependent Role="clients">
+              <PropertyRef Name="user_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="public_deliveries_supplier_id_fkey">
+          <End Role="suppliers" Type="Self.suppliers" Multiplicity="1" />
+          <End Role="deliveries" Type="Self.deliveries" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="suppliers">
+              <PropertyRef Name="supplier_id" />
+            </Principal>
+            <Dependent Role="deliveries">
+              <PropertyRef Name="supplier_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="public_employees_position_id_fkey">
+          <End Role="positions" Type="Self.positions" Multiplicity="1" />
+          <End Role="employees" Type="Self.employees" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="positions">
+              <PropertyRef Name="position_id" />
+            </Principal>
+            <Dependent Role="employees">
+              <PropertyRef Name="position_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="public_employees_user_id_fkey">
+          <End Role="users" Type="Self.users" Multiplicity="1" />
+          <End Role="employees" Type="Self.employees" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="users">
+              <PropertyRef Name="user_id" />
+            </Principal>
+            <Dependent Role="employees">
+              <PropertyRef Name="user_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="public_orderdetails_order_id_fkey">
+          <End Role="orders" Type="Self.orders" Multiplicity="1" />
+          <End Role="orderdetails" Type="Self.orderdetails" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="orders">
+              <PropertyRef Name="order_id" />
+            </Principal>
+            <Dependent Role="orderdetails">
+              <PropertyRef Name="order_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="public_orderdetails_product_id_fkey">
+          <End Role="pharmacyproducts" Type="Self.pharmacyproducts" Multiplicity="1" />
+          <End Role="orderdetails" Type="Self.orderdetails" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="pharmacyproducts">
+              <PropertyRef Name="product_id" />
+            </Principal>
+            <Dependent Role="orderdetails">
+              <PropertyRef Name="product_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="public_orders_client_id_fkey">
+          <End Role="clients" Type="Self.clients" Multiplicity="1" />
+          <End Role="orders" Type="Self.orders" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="clients">
+              <PropertyRef Name="client_id" />
+            </Principal>
+            <Dependent Role="orders">
+              <PropertyRef Name="client_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="public_supplierdeliveries_delivery_id_fkey">
+          <End Role="deliveries" Type="Self.deliveries" Multiplicity="1" />
+          <End Role="supplierdeliveries" Type="Self.supplierdeliveries" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="deliveries">
+              <PropertyRef Name="delivery_id" />
+            </Principal>
+            <Dependent Role="supplierdeliveries">
+              <PropertyRef Name="delivery_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="public_supplierdeliveries_product_id_fkey">
+          <End Role="pharmacyproducts" Type="Self.pharmacyproducts" Multiplicity="1" />
+          <End Role="supplierdeliveries" Type="Self.supplierdeliveries" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="pharmacyproducts">
+              <PropertyRef Name="product_id" />
+            </Principal>
+            <Dependent Role="supplierdeliveries">
+              <PropertyRef Name="product_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="public_users_role_id_fkey">
+          <End Role="roles" Type="Self.roles" Multiplicity="1" />
+          <End Role="users" Type="Self.users" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="roles">
+              <PropertyRef Name="role_id" />
+            </Principal>
+            <Dependent Role="users">
+              <PropertyRef Name="role_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Хранилище PharmacyModelContainer">
+          <EntitySet Name="clients" EntityType="Self.clients" Schema="public" store:Type="Tables" />
+          <EntitySet Name="deliveries" EntityType="Self.deliveries" Schema="public" store:Type="Tables" />
+          <EntitySet Name="employees" EntityType="Self.employees" Schema="public" store:Type="Tables" />
+          <EntitySet Name="orderdetails" EntityType="Self.orderdetails" Schema="public" store:Type="Tables" />
+          <EntitySet Name="orders" EntityType="Self.orders" Schema="public" store:Type="Tables" />
+          <EntitySet Name="pharmacyproducts" EntityType="Self.pharmacyproducts" Schema="public" store:Type="Tables" />
+          <EntitySet Name="positions" EntityType="Self.positions" Schema="public" store:Type="Tables" />
+          <EntitySet Name="roles" EntityType="Self.roles" Schema="public" store:Type="Tables" />
+          <EntitySet Name="supplierdeliveries" EntityType="Self.supplierdeliveries" Schema="public" store:Type="Tables" />
+          <EntitySet Name="suppliers" EntityType="Self.suppliers" Schema="public" store:Type="Tables" />
+          <EntitySet Name="users" EntityType="Self.users" Schema="public" store:Type="Tables" />
+          <AssociationSet Name="public_clients_user_id_fkey" Association="Self.public_clients_user_id_fkey">
+            <End Role="users" EntitySet="users" />
+            <End Role="clients" EntitySet="clients" />
+          </AssociationSet>
+          <AssociationSet Name="public_deliveries_supplier_id_fkey" Association="Self.public_deliveries_supplier_id_fkey">
+            <End Role="suppliers" EntitySet="suppliers" />
+            <End Role="deliveries" EntitySet="deliveries" />
+          </AssociationSet>
+          <AssociationSet Name="public_employees_position_id_fkey" Association="Self.public_employees_position_id_fkey">
+            <End Role="positions" EntitySet="positions" />
+            <End Role="employees" EntitySet="employees" />
+          </AssociationSet>
+          <AssociationSet Name="public_employees_user_id_fkey" Association="Self.public_employees_user_id_fkey">
+            <End Role="users" EntitySet="users" />
+            <End Role="employees" EntitySet="employees" />
+          </AssociationSet>
+          <AssociationSet Name="public_orderdetails_order_id_fkey" Association="Self.public_orderdetails_order_id_fkey">
+            <End Role="orders" EntitySet="orders" />
+            <End Role="orderdetails" EntitySet="orderdetails" />
+          </AssociationSet>
+          <AssociationSet Name="public_orderdetails_product_id_fkey" Association="Self.public_orderdetails_product_id_fkey">
+            <End Role="pharmacyproducts" EntitySet="pharmacyproducts" />
+            <End Role="orderdetails" EntitySet="orderdetails" />
+          </AssociationSet>
+          <AssociationSet Name="public_orders_client_id_fkey" Association="Self.public_orders_client_id_fkey">
+            <End Role="clients" EntitySet="clients" />
+            <End Role="orders" EntitySet="orders" />
+          </AssociationSet>
+          <AssociationSet Name="public_supplierdeliveries_delivery_id_fkey" Association="Self.public_supplierdeliveries_delivery_id_fkey">
+            <End Role="deliveries" EntitySet="deliveries" />
+            <End Role="supplierdeliveries" EntitySet="supplierdeliveries" />
+          </AssociationSet>
+          <AssociationSet Name="public_supplierdeliveries_product_id_fkey" Association="Self.public_supplierdeliveries_product_id_fkey">
+            <End Role="pharmacyproducts" EntitySet="pharmacyproducts" />
+            <End Role="supplierdeliveries" EntitySet="supplierdeliveries" />
+          </AssociationSet>
+          <AssociationSet Name="public_users_role_id_fkey" Association="Self.public_users_role_id_fkey">
+            <End Role="roles" EntitySet="roles" />
+            <End Role="users" EntitySet="users" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="PharmacyModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="clients">
+          <Key>
+            <PropertyRef Name="client_id" />
+          </Key>
+          <Property Name="client_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="user_id" Type="Int32" />
+          <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="surname" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="patronymic" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="contact_info" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="users" Relationship="Self.public_clients_user_id_fkey" FromRole="clients" ToRole="users" />
+          <NavigationProperty Name="orders" Relationship="Self.public_orders_client_id_fkey" FromRole="clients" ToRole="orders" />
+        </EntityType>
+        <EntityType Name="deliveries">
+          <Key>
+            <PropertyRef Name="delivery_id" />
+          </Key>
+          <Property Name="delivery_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="supplier_id" Type="Int32" Nullable="false" />
+          <Property Name="delivery_date" Type="DateTime" Nullable="false" />
+          <NavigationProperty Name="suppliers" Relationship="Self.public_deliveries_supplier_id_fkey" FromRole="deliveries" ToRole="suppliers" />
+          <NavigationProperty Name="supplierdeliveries" Relationship="Self.public_supplierdeliveries_delivery_id_fkey" FromRole="deliveries" ToRole="supplierdeliveries" />
+        </EntityType>
+        <EntityType Name="employees">
+          <Key>
+            <PropertyRef Name="employee_id" />
+          </Key>
+          <Property Name="employee_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="user_id" Type="Int32" Nullable="false" />
+          <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="surname" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="patronymic" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="position_id" Type="Int32" Nullable="false" />
+          <Property Name="phone_number" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="passport_series" Type="String" MaxLength="4" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="passport_number" Type="String" MaxLength="6" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="positions" Relationship="Self.public_employees_position_id_fkey" FromRole="employees" ToRole="positions" />
+          <NavigationProperty Name="users" Relationship="Self.public_employees_user_id_fkey" FromRole="employees" ToRole="users" />
+        </EntityType>
+        <EntityType Name="orderdetails">
+          <Key>
+            <PropertyRef Name="order_id" />
+            <PropertyRef Name="product_id" />
+          </Key>
+          <Property Name="order_id" Type="Int32" Nullable="false" />
+          <Property Name="product_id" Type="Int32" Nullable="false" />
+          <Property Name="quantity" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="orders" Relationship="Self.public_orderdetails_order_id_fkey" FromRole="orderdetails" ToRole="orders" />
+          <NavigationProperty Name="pharmacyproducts" Relationship="Self.public_orderdetails_product_id_fkey" FromRole="orderdetails" ToRole="pharmacyproducts" />
+        </EntityType>
+        <EntityType Name="orders">
+          <Key>
+            <PropertyRef Name="order_id" />
+          </Key>
+          <Property Name="order_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="client_id" Type="Int32" Nullable="false" />
+          <Property Name="status" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="delivery_date" Type="DateTime" Nullable="false" />
+          <Property Name="pickup_location" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="order_date" Type="DateTime" Nullable="false" />
+          <Property Name="order_code" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="total_amount" Type="Decimal" Precision="19" Scale="2" />
+          <NavigationProperty Name="clients" Relationship="Self.public_orders_client_id_fkey" FromRole="orders" ToRole="clients" />
+          <NavigationProperty Name="orderdetails" Relationship="Self.public_orderdetails_order_id_fkey" FromRole="orders" ToRole="orderdetails" />
+        </EntityType>
+        <EntityType Name="pharmacyproducts">
+          <Key>
+            <PropertyRef Name="product_id" />
+          </Key>
+          <Property Name="product_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="article_number" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="category" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="image_url" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="manufacturer" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="price" Type="Decimal" Precision="19" Scale="2" Nullable="false" />
+          <Property Name="discount" Type="Decimal" Precision="5" Scale="2" />
+          <Property Name="stock_quantity" Type="Int32" />
+          <Property Name="status" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="unit_of_measurement" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="quantity_per_pack" Type="Int32" />
+          <NavigationProperty Name="orderdetails" Relationship="Self.public_orderdetails_product_id_fkey" FromRole="pharmacyproducts" ToRole="orderdetails" />
+          <NavigationProperty Name="supplierdeliveries" Relationship="Self.public_supplierdeliveries_product_id_fkey" FromRole="pharmacyproducts" ToRole="supplierdeliveries" />
+        </EntityType>
+        <EntityType Name="positions">
+          <Key>
+            <PropertyRef Name="position_id" />
+          </Key>
+          <Property Name="position_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="position_name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="education_qualification" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="salary" Type="Decimal" Precision="19" Scale="2" Nullable="false" />
+          <NavigationProperty Name="employees" Relationship="Self.public_employees_position_id_fkey" FromRole="positions" ToRole="employees" />
+        </EntityType>
+        <EntityType Name="roles">
+          <Key>
+            <PropertyRef Name="role_id" />
+          </Key>
+          <Property Name="role_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="role_name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="users" Relationship="Self.public_users_role_id_fkey" FromRole="roles" ToRole="users" />
+        </EntityType>
+        <EntityType Name="supplierdeliveries">
+          <Key>
+            <PropertyRef Name="delivery_id" />
+            <PropertyRef Name="product_id" />
+          </Key>
+          <Property Name="delivery_id" Type="Int32" Nullable="false" />
+          <Property Name="product_id" Type="Int32" Nullable="false" />
+          <Property Name="quantity" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="deliveries" Relationship="Self.public_supplierdeliveries_delivery_id_fkey" FromRole="supplierdeliveries" ToRole="deliveries" />
+          <NavigationProperty Name="pharmacyproducts" Relationship="Self.public_supplierdeliveries_product_id_fkey" FromRole="supplierdeliveries" ToRole="pharmacyproducts" />
+        </EntityType>
+        <EntityType Name="suppliers">
+          <Key>
+            <PropertyRef Name="supplier_id" />
+          </Key>
+          <Property Name="supplier_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="address" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="phone_number" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="deliveries" Relationship="Self.public_deliveries_supplier_id_fkey" FromRole="suppliers" ToRole="deliveries" />
+        </EntityType>
+        <EntityType Name="users">
+          <Key>
+            <PropertyRef Name="user_id" />
+          </Key>
+          <Property Name="user_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="login" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="password" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="role_id" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="clients" Relationship="Self.public_clients_user_id_fkey" FromRole="users" ToRole="clients" />
+          <NavigationProperty Name="employees" Relationship="Self.public_employees_user_id_fkey" FromRole="users" ToRole="employees" />
+          <NavigationProperty Name="roles" Relationship="Self.public_users_role_id_fkey" FromRole="users" ToRole="roles" />
+        </EntityType>
+        <Association Name="public_clients_user_id_fkey">
+          <End Role="users" Type="Self.users" Multiplicity="0..1" />
+          <End Role="clients" Type="Self.clients" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="users">
+              <PropertyRef Name="user_id" />
+            </Principal>
+            <Dependent Role="clients">
+              <PropertyRef Name="user_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="public_orders_client_id_fkey">
+          <End Role="clients" Type="Self.clients" Multiplicity="1" />
+          <End Role="orders" Type="Self.orders" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="clients">
+              <PropertyRef Name="client_id" />
+            </Principal>
+            <Dependent Role="orders">
+              <PropertyRef Name="client_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="public_deliveries_supplier_id_fkey">
+          <End Role="suppliers" Type="Self.suppliers" Multiplicity="1" />
+          <End Role="deliveries" Type="Self.deliveries" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="suppliers">
+              <PropertyRef Name="supplier_id" />
+            </Principal>
+            <Dependent Role="deliveries">
+              <PropertyRef Name="supplier_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="public_supplierdeliveries_delivery_id_fkey">
+          <End Role="deliveries" Type="Self.deliveries" Multiplicity="1" />
+          <End Role="supplierdeliveries" Type="Self.supplierdeliveries" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="deliveries">
+              <PropertyRef Name="delivery_id" />
+            </Principal>
+            <Dependent Role="supplierdeliveries">
+              <PropertyRef Name="delivery_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="public_employees_position_id_fkey">
+          <End Role="positions" Type="Self.positions" Multiplicity="1" />
+          <End Role="employees" Type="Self.employees" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="positions">
+              <PropertyRef Name="position_id" />
+            </Principal>
+            <Dependent Role="employees">
+              <PropertyRef Name="position_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="public_employees_user_id_fkey">
+          <End Role="users" Type="Self.users" Multiplicity="1" />
+          <End Role="employees" Type="Self.employees" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="users">
+              <PropertyRef Name="user_id" />
+            </Principal>
+            <Dependent Role="employees">
+              <PropertyRef Name="user_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="public_orderdetails_order_id_fkey">
+          <End Role="orders" Type="Self.orders" Multiplicity="1" />
+          <End Role="orderdetails" Type="Self.orderdetails" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="orders">
+              <PropertyRef Name="order_id" />
+            </Principal>
+            <Dependent Role="orderdetails">
+              <PropertyRef Name="order_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="public_orderdetails_product_id_fkey">
+          <End Role="pharmacyproducts" Type="Self.pharmacyproducts" Multiplicity="1" />
+          <End Role="orderdetails" Type="Self.orderdetails" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="pharmacyproducts">
+              <PropertyRef Name="product_id" />
+            </Principal>
+            <Dependent Role="orderdetails">
+              <PropertyRef Name="product_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="public_supplierdeliveries_product_id_fkey">
+          <End Role="pharmacyproducts" Type="Self.pharmacyproducts" Multiplicity="1" />
+          <End Role="supplierdeliveries" Type="Self.supplierdeliveries" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="pharmacyproducts">
+              <PropertyRef Name="product_id" />
+            </Principal>
+            <Dependent Role="supplierdeliveries">
+              <PropertyRef Name="product_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="public_users_role_id_fkey">
+          <End Role="roles" Type="Self.roles" Multiplicity="1" />
+          <End Role="users" Type="Self.users" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="roles">
+              <PropertyRef Name="role_id" />
+            </Principal>
+            <Dependent Role="users">
+              <PropertyRef Name="role_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Entities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="clients" EntityType="Self.clients" />
+          <EntitySet Name="deliveries" EntityType="Self.deliveries" />
+          <EntitySet Name="employees" EntityType="Self.employees" />
+          <EntitySet Name="orderdetails" EntityType="Self.orderdetails" />
+          <EntitySet Name="orders" EntityType="Self.orders" />
+          <EntitySet Name="pharmacyproducts" EntityType="Self.pharmacyproducts" />
+          <EntitySet Name="positions" EntityType="Self.positions" />
+          <EntitySet Name="roles" EntityType="Self.roles" />
+          <EntitySet Name="supplierdeliveries" EntityType="Self.supplierdeliveries" />
+          <EntitySet Name="suppliers" EntityType="Self.suppliers" />
+          <EntitySet Name="users" EntityType="Self.users" />
+          <AssociationSet Name="public_clients_user_id_fkey" Association="Self.public_clients_user_id_fkey">
+            <End Role="users" EntitySet="users" />
+            <End Role="clients" EntitySet="clients" />
+          </AssociationSet>
+          <AssociationSet Name="public_orders_client_id_fkey" Association="Self.public_orders_client_id_fkey">
+            <End Role="clients" EntitySet="clients" />
+            <End Role="orders" EntitySet="orders" />
+          </AssociationSet>
+          <AssociationSet Name="public_deliveries_supplier_id_fkey" Association="Self.public_deliveries_supplier_id_fkey">
+            <End Role="suppliers" EntitySet="suppliers" />
+            <End Role="deliveries" EntitySet="deliveries" />
+          </AssociationSet>
+          <AssociationSet Name="public_supplierdeliveries_delivery_id_fkey" Association="Self.public_supplierdeliveries_delivery_id_fkey">
+            <End Role="deliveries" EntitySet="deliveries" />
+            <End Role="supplierdeliveries" EntitySet="supplierdeliveries" />
+          </AssociationSet>
+          <AssociationSet Name="public_employees_position_id_fkey" Association="Self.public_employees_position_id_fkey">
+            <End Role="positions" EntitySet="positions" />
+            <End Role="employees" EntitySet="employees" />
+          </AssociationSet>
+          <AssociationSet Name="public_employees_user_id_fkey" Association="Self.public_employees_user_id_fkey">
+            <End Role="users" EntitySet="users" />
+            <End Role="employees" EntitySet="employees" />
+          </AssociationSet>
+          <AssociationSet Name="public_orderdetails_order_id_fkey" Association="Self.public_orderdetails_order_id_fkey">
+            <End Role="orders" EntitySet="orders" />
+            <End Role="orderdetails" EntitySet="orderdetails" />
+          </AssociationSet>
+          <AssociationSet Name="public_orderdetails_product_id_fkey" Association="Self.public_orderdetails_product_id_fkey">
+            <End Role="pharmacyproducts" EntitySet="pharmacyproducts" />
+            <End Role="orderdetails" EntitySet="orderdetails" />
+          </AssociationSet>
+          <AssociationSet Name="public_supplierdeliveries_product_id_fkey" Association="Self.public_supplierdeliveries_product_id_fkey">
+            <End Role="pharmacyproducts" EntitySet="pharmacyproducts" />
+            <End Role="supplierdeliveries" EntitySet="supplierdeliveries" />
+          </AssociationSet>
+          <AssociationSet Name="public_users_role_id_fkey" Association="Self.public_users_role_id_fkey">
+            <End Role="roles" EntitySet="roles" />
+            <End Role="users" EntitySet="users" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="Хранилище PharmacyModelContainer" CdmEntityContainer="Entities">
+          <EntitySetMapping Name="clients">
+            <EntityTypeMapping TypeName="PharmacyModel.clients">
+              <MappingFragment StoreEntitySet="clients">
+                <ScalarProperty Name="client_id" ColumnName="client_id" />
+                <ScalarProperty Name="user_id" ColumnName="user_id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="surname" ColumnName="surname" />
+                <ScalarProperty Name="patronymic" ColumnName="patronymic" />
+                <ScalarProperty Name="contact_info" ColumnName="contact_info" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="deliveries">
+            <EntityTypeMapping TypeName="PharmacyModel.deliveries">
+              <MappingFragment StoreEntitySet="deliveries">
+                <ScalarProperty Name="delivery_id" ColumnName="delivery_id" />
+                <ScalarProperty Name="supplier_id" ColumnName="supplier_id" />
+                <ScalarProperty Name="delivery_date" ColumnName="delivery_date" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="employees">
+            <EntityTypeMapping TypeName="PharmacyModel.employees">
+              <MappingFragment StoreEntitySet="employees">
+                <ScalarProperty Name="employee_id" ColumnName="employee_id" />
+                <ScalarProperty Name="user_id" ColumnName="user_id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="surname" ColumnName="surname" />
+                <ScalarProperty Name="patronymic" ColumnName="patronymic" />
+                <ScalarProperty Name="position_id" ColumnName="position_id" />
+                <ScalarProperty Name="phone_number" ColumnName="phone_number" />
+                <ScalarProperty Name="passport_series" ColumnName="passport_series" />
+                <ScalarProperty Name="passport_number" ColumnName="passport_number" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="orderdetails">
+            <EntityTypeMapping TypeName="PharmacyModel.orderdetails">
+              <MappingFragment StoreEntitySet="orderdetails">
+                <ScalarProperty Name="order_id" ColumnName="order_id" />
+                <ScalarProperty Name="product_id" ColumnName="product_id" />
+                <ScalarProperty Name="quantity" ColumnName="quantity" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="orders">
+            <EntityTypeMapping TypeName="PharmacyModel.orders">
+              <MappingFragment StoreEntitySet="orders">
+                <ScalarProperty Name="order_id" ColumnName="order_id" />
+                <ScalarProperty Name="client_id" ColumnName="client_id" />
+                <ScalarProperty Name="status" ColumnName="status" />
+                <ScalarProperty Name="delivery_date" ColumnName="delivery_date" />
+                <ScalarProperty Name="pickup_location" ColumnName="pickup_location" />
+                <ScalarProperty Name="order_date" ColumnName="order_date" />
+                <ScalarProperty Name="order_code" ColumnName="order_code" />
+                <ScalarProperty Name="total_amount" ColumnName="total_amount" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="pharmacyproducts">
+            <EntityTypeMapping TypeName="PharmacyModel.pharmacyproducts">
+              <MappingFragment StoreEntitySet="pharmacyproducts">
+                <ScalarProperty Name="product_id" ColumnName="product_id" />
+                <ScalarProperty Name="article_number" ColumnName="article_number" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="description" ColumnName="description" />
+                <ScalarProperty Name="category" ColumnName="category" />
+                <ScalarProperty Name="image_url" ColumnName="image_url" />
+                <ScalarProperty Name="manufacturer" ColumnName="manufacturer" />
+                <ScalarProperty Name="price" ColumnName="price" />
+                <ScalarProperty Name="discount" ColumnName="discount" />
+                <ScalarProperty Name="stock_quantity" ColumnName="stock_quantity" />
+                <ScalarProperty Name="status" ColumnName="status" />
+                <ScalarProperty Name="unit_of_measurement" ColumnName="unit_of_measurement" />
+                <ScalarProperty Name="quantity_per_pack" ColumnName="quantity_per_pack" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="positions">
+            <EntityTypeMapping TypeName="PharmacyModel.positions">
+              <MappingFragment StoreEntitySet="positions">
+                <ScalarProperty Name="position_id" ColumnName="position_id" />
+                <ScalarProperty Name="position_name" ColumnName="position_name" />
+                <ScalarProperty Name="education_qualification" ColumnName="education_qualification" />
+                <ScalarProperty Name="salary" ColumnName="salary" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="roles">
+            <EntityTypeMapping TypeName="PharmacyModel.roles">
+              <MappingFragment StoreEntitySet="roles">
+                <ScalarProperty Name="role_id" ColumnName="role_id" />
+                <ScalarProperty Name="role_name" ColumnName="role_name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="supplierdeliveries">
+            <EntityTypeMapping TypeName="PharmacyModel.supplierdeliveries">
+              <MappingFragment StoreEntitySet="supplierdeliveries">
+                <ScalarProperty Name="delivery_id" ColumnName="delivery_id" />
+                <ScalarProperty Name="product_id" ColumnName="product_id" />
+                <ScalarProperty Name="quantity" ColumnName="quantity" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="suppliers">
+            <EntityTypeMapping TypeName="PharmacyModel.suppliers">
+              <MappingFragment StoreEntitySet="suppliers">
+                <ScalarProperty Name="supplier_id" ColumnName="supplier_id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="address" ColumnName="address" />
+                <ScalarProperty Name="phone_number" ColumnName="phone_number" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="users">
+            <EntityTypeMapping TypeName="PharmacyModel.users">
+              <MappingFragment StoreEntitySet="users">
+                <ScalarProperty Name="user_id" ColumnName="user_id" />
+                <ScalarProperty Name="login" ColumnName="login" />
+                <ScalarProperty Name="password" ColumnName="password" />
+                <ScalarProperty Name="role_id" ColumnName="role_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="true" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Нет" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

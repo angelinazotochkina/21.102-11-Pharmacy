@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="177a07c42d37432aa464cf92e6548e9d" Name="Diagram1">
+        <EntityTypeShape EntityType="PharmacyModel.clients" Width="1.5" PointX="5.25" PointY="5" IsExpanded="true" />
+        <EntityTypeShape EntityType="PharmacyModel.deliveries" Width="1.5" PointX="7.5" PointY="15.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="PharmacyModel.employees" Width="1.5" PointX="5.25" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="PharmacyModel.orderdetails" Width="1.5" PointX="9.75" PointY="5.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="PharmacyModel.orders" Width="1.5" PointX="7.5" PointY="4.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="PharmacyModel.pharmacyproducts" Width="1.5" PointX="7.5" PointY="10.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="PharmacyModel.positions" Width="1.5" PointX="3" PointY="2" IsExpanded="true" />
+        <EntityTypeShape EntityType="PharmacyModel.roles" Width="1.5" PointX="0.75" PointY="5.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="PharmacyModel.supplierdeliveries" Width="1.5" PointX="9.75" PointY="11.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="PharmacyModel.suppliers" Width="1.5" PointX="5.25" PointY="15.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="PharmacyModel.users" Width="1.5" PointX="3" PointY="5.125" IsExpanded="true" />
+        <AssociationConnector Association="PharmacyModel.public_clients_user_id_fkey" ManuallyRouted="false" />
+        <AssociationConnector Association="PharmacyModel.public_orders_client_id_fkey" ManuallyRouted="false" />
+        <AssociationConnector Association="PharmacyModel.public_deliveries_supplier_id_fkey" ManuallyRouted="false" />
+        <AssociationConnector Association="PharmacyModel.public_supplierdeliveries_delivery_id_fkey" ManuallyRouted="false" />
+        <AssociationConnector Association="PharmacyModel.public_employees_position_id_fkey" ManuallyRouted="false" />
+        <AssociationConnector Association="PharmacyModel.public_employees_user_id_fkey" ManuallyRouted="false" />
+        <AssociationConnector Association="PharmacyModel.public_orderdetails_order_id_fkey" ManuallyRouted="false" />
+        <AssociationConnector Association="PharmacyModel.public_orderdetails_product_id_fkey" ManuallyRouted="false" />
+        <AssociationConnector Association="PharmacyModel.public_supplierdeliveries_product_id_fkey" ManuallyRouted="false" />
+        <AssociationConnector Association="PharmacyModel.public_users_role_id_fkey" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

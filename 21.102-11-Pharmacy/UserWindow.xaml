@@ -1,0 +1,39 @@
+﻿<Window x:Class="_21._102_11_Pharmacy.UserWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:_21._102_11_Pharmacy"
+        mc:Ignorable="d"
+        Title="UserWindow" Height="450" Width="800">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="40"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="150"/>
+            <ColumnDefinition Width="170"/>
+            <ColumnDefinition Width="170"/>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="80"/>
+            <ColumnDefinition Width="80"/>
+        </Grid.ColumnDefinitions>
+
+        <TextBox x:Name="txtSearchProduct" Grid.Row="0" Grid.Column="0"  Margin="10"/>
+        <ComboBox x:Name="cmbCategory" Grid.Row="0" Grid.Column="1" Text="Select category..." Margin="10"/>
+        <ComboBox x:Name="cmbManufacturer" Grid.Row="0" Grid.Column="2" Text="Select manufacturer..." Margin="10"/>
+        <TextBox x:Name="txtMinPrice" Grid.Row="0" Grid.Column="3" Text="Min price" Margin="10"/>
+        <TextBox x:Name="txtMaxPrice" Grid.Row="0" Grid.Column="4" Text="Max price" Margin="10"/>
+        <Button Content="Search" Click="SearchProducts_Click" Grid.Row="0" Grid.Column="5" Margin="10"/>
+        <Button Content="Clear" Click="ClearProducts_Click" Grid.Row="0" Grid.Column="6" Margin="10"/>
+
+        <ListBox x:Name="lstSearchResults" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="6" DisplayMemberPath="{Binding Path=name, StringFormat='{}{0} - {1} - {2} - {3} - {4}'}" Margin="10,10,10,10" Height="200"/>
+        <ListBox x:Name="lstCart" Grid.Row="2" Grid.ColumnSpan="6" Height="156" Margin="10,0,10,0" VerticalAlignment="Center"/>
+        <Button Content="Добавить в корзину" Grid.Row="1" Grid.Column="7" Click="AddToCart_Click" Margin="28,10,28,10"/>
+        <Button Content="Оформить" Grid.Row="2" Grid.Column="7" Click="PlaceOrder_Click" Margin="28,10,28,10"/>
+    </Grid>
+</Window>
