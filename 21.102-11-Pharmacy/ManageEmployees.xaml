@@ -73,6 +73,6 @@
 
 
 
-
+        <Button Content="Назад" Click="ButtonBack_Click" Margin="10,11,0,0" Grid.Row="6" Grid.Column="6" HorizontalAlignment="Left" Width="88" Height="28" VerticalAlignment="Top" />
     </Grid>
 </Window>

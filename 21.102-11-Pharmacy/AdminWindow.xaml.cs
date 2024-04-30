@@ -25,12 +25,16 @@ namespace _21._102_11_Pharmacy
 
         private void GoToManagePharmacyProducts_Click(object sender, RoutedEventArgs e)
         {
-
+            ManageProducts products = new ManageProducts();
+            products.Show();
+            Close();
         }
 
         private void GoToManageUsers_Click(object sender, RoutedEventArgs e)
         {
-
+            ManageUsers users = new ManageUsers();
+           users.Show();
+            Close();
         }
     }
 }

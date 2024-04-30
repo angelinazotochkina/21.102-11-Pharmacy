@@ -169,5 +169,12 @@ namespace _21._102_11_Pharmacy
             string searchTerm = txtSearch.Text.Trim(); // Значение поискового запроса
             SearchEmployees(searchTerm);
         }
+
+        private void ButtonBack_Click(object sender, RoutedEventArgs e)
+        {
+            AdminWindow admin = new AdminWindow();
+            admin.Show();
+            Close();
+        }
     }
 }
