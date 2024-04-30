@@ -1,5 +1,6 @@
 ﻿using _21._102_11_Pharmacy.Model;
 using System;
+using System.Data;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
@@ -11,6 +12,7 @@ namespace _21._102_11_Pharmacy
         public ManageEmployees()
         {
             InitializeComponent();
+            LoadEmployeesData();
         }
 
         private void LoadEmployeesData()
@@ -27,10 +29,22 @@ namespace _21._102_11_Pharmacy
             if (EmployeesDataGrid.SelectedItem != null)
             {
                 employees selectedEmployee = (employees)EmployeesDataGrid.SelectedItem;
-                // Логика обновления выбранного сотрудника
-                // Вам нужно будет открыть окно/форму для редактирования данных и сохранения изменений в базу данных
+
+                txtName.Text = selectedEmployee.name;
+                txtSurname.Text = selectedEmployee.surname;
+                txtPatronymic.Text = selectedEmployee.patronymic;
+                txtPositionId.Text = selectedEmployee.position_id.ToString();
+                txtContactInfo.Text = selectedEmployee.phone_number;
+                txtPassportSeries.Text = selectedEmployee.passport_series;
+                txtPassportNumber.Text = selectedEmployee.passport_number;
+
             }
         }
+
+
+
+
+
 
         private void AddEmployee_Click(object sender, RoutedEventArgs e)
         {
@@ -96,6 +110,39 @@ namespace _21._102_11_Pharmacy
                         LoadEmployeesData();
                     }
                 }
+            }
+        }
+
+        private void SaveEmployee_Click(object sender, RoutedEventArgs e)
+        {
+            if (EmployeesDataGrid.SelectedItem != null)
+            {
+                employees selectedEmployee = (employees)EmployeesDataGrid.SelectedItem;
+
+                // Получаем обновленные данные из текстовых полей
+                selectedEmployee.name = txtName.Text;
+                selectedEmployee.surname = txtSurname.Text;
+                selectedEmployee.patronymic = txtPatronymic.Text;
+                selectedEmployee.position_id = int.Parse(txtPositionId.Text);
+                selectedEmployee.phone_number = txtContactInfo.Text;
+                selectedEmployee.passport_series = txtPassportSeries.Text;
+                selectedEmployee.passport_number = txtPassportNumber.Text;
+
+                using (var db = new Entities())
+                {
+                    // Обновляем данные о сотруднике в базе данных
+                    db.Entry(selectedEmployee).State = EntityState.Modified;
+                    db.SaveChanges();
+
+                    // Перезагружаем данные в DataGrid
+                    LoadEmployeesData();
+                }
+
+                MessageBox.Show("Employee updated successfully!");
+            }
+            else
+            {
+                MessageBox.Show("Please select an employee to update.");
             }
         }
     }

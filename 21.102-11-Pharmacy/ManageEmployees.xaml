@@ -42,6 +42,7 @@
         </DataGrid>
         <Button Content="Add Employee" Click="AddEmployee_Click" Grid.Column="1" Margin="24,2,24,12" Grid.Row="2" />
         <Button Content="Update Employee" Click="UpdateEmployee_Click" Grid.Column="2" Margin="24,0,24,10" Grid.Row="2" />
+        <Button Content="Save" Click="SaveEmployee_Click" Grid.Column="3" Margin="24,0,24,10" Grid.Row="2" />
         <Button Content="Delete Employee" Click="DeleteEmployee_Click" Margin="10,0,0,12" Grid.Row="2" Grid.Column="6" HorizontalAlignment="Left" Width="88" />
 
         <Label Content="Name:" Grid.Row="3"/>
