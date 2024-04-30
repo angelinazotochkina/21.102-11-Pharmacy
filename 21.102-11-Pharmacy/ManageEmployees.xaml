@@ -26,6 +26,7 @@
             <ColumnDefinition Width="80"/>
             <ColumnDefinition Width="120"/>
         </Grid.ColumnDefinitions>
+        <TextBox x:Name="txtSearch" Grid.Row="0" Margin="10,5,141,0" Grid.ColumnSpan="2" />
         <DataGrid x:Name="EmployeesDataGrid" Grid.Row="1" AutoGenerateColumns="False" ItemsSource="{Binding Employees}" Grid.ColumnSpan="7" Margin="10,24,22,23">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Employee ID" Binding="{Binding employee_id}" IsReadOnly="True" />
@@ -33,38 +34,41 @@
                 <DataGridTextColumn Header="Surname" Binding="{Binding surname}" />
                 <DataGridTextColumn Header="Patronymic" Binding="{Binding patronymic}" />
                 <DataGridTextColumn Header="Position ID" Binding="{Binding position_id}" />
-                <DataGridTextColumn Header="Contact Info" Binding="{Binding contact_info}" />
+                <DataGridTextColumn Header="Phone number" Binding="{Binding phone_number}" />
                 <DataGridTextColumn Header="Passport Series" Binding="{Binding passport_series}" />
                 <DataGridTextColumn Header="Passport Number" Binding="{Binding passport_number}" />
             </DataGrid.Columns>
 
 
         </DataGrid>
-        <Button Content="Add Employee" Click="AddEmployee_Click" Grid.Column="1" Margin="24,2,24,12" Grid.Row="2" />
-        <Button Content="Update Employee" Click="UpdateEmployee_Click" Grid.Column="2" Margin="24,0,24,10" Grid.Row="2" />
-        <Button Content="Save" Click="SaveEmployee_Click" Grid.Column="3" Margin="24,0,24,10" Grid.Row="2" />
-        <Button Content="Delete Employee" Click="DeleteEmployee_Click" Margin="10,0,0,12" Grid.Row="2" Grid.Column="6" HorizontalAlignment="Left" Width="88" />
+        <Button Content="Поиск" Click="SearchButton_Click" Grid.Column="0" Margin="24,2,24,12" Grid.Row="2" />
+        <Button Content="Добавить" Click="AddEmployee_Click" Grid.Column="1" Margin="24,2,24,12" Grid.Row="2" />
+        <Button Content="Обновить" Click="UpdateEmployee_Click" Grid.Column="2" Margin="24,0,24,10" Grid.Row="2" />
+        <Button Content="Сохранить" Click="SaveEmployee_Click" Grid.Column="3" Margin="24,0,24,10" Grid.Row="2" />
+        <Button Content="Удалить" Click="DeleteEmployee_Click" Margin="10,0,0,12" Grid.Row="2" Grid.Column="6" HorizontalAlignment="Left" Width="88" />
 
-        <Label Content="Name:" Grid.Row="3"/>
+        <Label Content="Имя:" Grid.Row="3"/>
         <TextBox x:Name="txtName" Grid.Row="4" Margin="10,0,10,0" />
 
-        <Label Content="Surname:" Grid.Row="3" Grid.Column="1"/>
+        <Label Content="Фамилия:" Grid.Row="3" Grid.Column="1"/>
         <TextBox x:Name="txtSurname" Grid.Row="4" Grid.Column="1" Margin="10,0,10,0" />
 
-        <Label Content="Patronymic:" Grid.Row="3" Grid.Column="2"/>
+        <Label Content="Отчество:" Grid.Row="3" Grid.Column="2"/>
         <TextBox x:Name="txtPatronymic" Grid.Row="4" Grid.Column="2" Margin="10,0,10,0"  />
 
-        <Label Content="Position ID:" Grid.Row="3" Grid.Column="3"/>
+        <Label Content="ID Должности :" Grid.Row="3" Grid.Column="3"/>
         <TextBox x:Name="txtPositionId" Grid.Row="4" Grid.Column="3" Margin="10,0,10,0" />
 
-        <Label Content="Contact Info:" Grid.Row="5" Grid.Column="0"/>
+        <Label Content="Номер телефона:" Grid.Row="5" Grid.Column="0"/>
         <TextBox x:Name="txtContactInfo" Grid.Row="6" Grid.Column="0" Margin="10,0,10,0"  />
 
-        <Label Content="Passport Series:"  Grid.Row="5" Grid.Column="1"/>
+        <Label Content="Серия паспорта:"  Grid.Row="5" Grid.Column="1"/>
         <TextBox x:Name="txtPassportSeries" Grid.Row="6" Grid.Column="1" Margin="10,0,10,0"  />
 
-        <Label Content="Passport Number:"  Grid.Row="5" Grid.Column="2"/>
+        <Label Content="Номер паспорта:"  Grid.Row="5" Grid.Column="2"/>
         <TextBox x:Name="txtPassportNumber" Grid.Row="6" Grid.Column="2" Margin="10,0,10,0"  />
+        <Label Content="ID Пользователя :" Grid.Row="5" Grid.Column="3" Grid.ColumnSpan="3" Margin="0,0,80,0"/>
+        <TextBox x:Name="txtUserId" Grid.Row="6" Grid.Column="3" Margin="10,0,10,0" />
 
 
 

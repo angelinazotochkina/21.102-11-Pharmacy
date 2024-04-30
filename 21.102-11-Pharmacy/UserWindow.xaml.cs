@@ -85,8 +85,8 @@ namespace _21._102_11_Pharmacy
         private void ClearProducts_Click(object sender, RoutedEventArgs e)
         {
             txtSearchProduct.Text = "";
-            txtMinPrice.Text = "Min price";
-            txtMaxPrice.Text = "Max price";
+            txtMinPrice.Text = "от руб.";
+            txtMaxPrice.Text = "до руб.";
 
             cmbCategory.SelectedItem = null;
             cmbManufacturer.SelectedItem = null;
@@ -169,11 +169,11 @@ namespace _21._102_11_Pharmacy
                     lstCart.Items.Clear();
                     selectedProductIds.Clear();
 
-                    MessageBox.Show("Order placed successfully!");
+                    MessageBox.Show("Заказ успешно создан");
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show("Error placing order: " + ex.Message);
+                    MessageBox.Show("Ошибка создания заказа: " + ex.Message);
                 }
             }
         }

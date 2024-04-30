@@ -66,7 +66,7 @@ namespace _21._102_11_Pharmacy
 
             // Логика добавления нового сотрудника в базу данных
             employees newEmployee = new employees
-            {
+            {   user_id= int.Parse(txtUserId.Text),
                 name = txtName.Text,
                 surname = txtSurname.Text,
                 patronymic = txtPatronymic.Text,
@@ -91,6 +91,7 @@ namespace _21._102_11_Pharmacy
             txtContactInfo.Text = "";
             txtPassportSeries.Text = "";
             txtPassportNumber.Text = "";
+            txtUserId.Text = "";
         }
 
         private void DeleteEmployee_Click(object sender, RoutedEventArgs e)
@@ -144,6 +145,29 @@ namespace _21._102_11_Pharmacy
             {
                 MessageBox.Show("Please select an employee to update.");
             }
+        }
+
+
+        private void SearchEmployees(string searchTerm)
+        {
+            using (var db = new Entities())
+            {
+                var searchResults = db.employees.Where(emp =>
+                    emp.name.Contains(searchTerm) ||
+                    emp.surname.Contains(searchTerm) ||
+                    emp.phone_number.Contains(searchTerm) ||
+                    emp.passport_series.Contains(searchTerm) ||
+                    emp.passport_number.Contains(searchTerm)
+                ).ToList();
+
+                EmployeesDataGrid.ItemsSource = searchResults;
+            }
+        }
+
+        private void SearchButton_Click(object sender, RoutedEventArgs e)
+        {
+            string searchTerm = txtSearch.Text.Trim(); // Значение поискового запроса
+            SearchEmployees(searchTerm);
         }
     }
 }

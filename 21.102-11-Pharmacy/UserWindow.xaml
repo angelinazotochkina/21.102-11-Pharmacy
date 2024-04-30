@@ -24,16 +24,16 @@
         </Grid.ColumnDefinitions>
 
         <TextBox x:Name="txtSearchProduct" Grid.Row="0" Grid.Column="0"  Margin="10"/>
-        <ComboBox x:Name="cmbCategory" Grid.Row="0" Grid.Column="1" Text="Select category..." Margin="10"/>
-        <ComboBox x:Name="cmbManufacturer" Grid.Row="0" Grid.Column="2" Text="Select manufacturer..." Margin="10"/>
+        <ComboBox x:Name="cmbCategory" Grid.Row="0" Grid.Column="1" Text="Категория..." Margin="10"/>
+        <ComboBox x:Name="cmbManufacturer" Grid.Row="0" Grid.Column="2" Text="Производитель..." Margin="10"/>
         <TextBox x:Name="txtMinPrice" Grid.Row="0" Grid.Column="3" Text="Min price" Margin="10"/>
         <TextBox x:Name="txtMaxPrice" Grid.Row="0" Grid.Column="4" Text="Max price" Margin="10"/>
-        <Button Content="Search" Click="SearchProducts_Click" Grid.Row="0" Grid.Column="5" Margin="10"/>
-        <Button Content="Clear" Click="ClearProducts_Click" Grid.Row="0" Grid.Column="6" Margin="10"/>
+        <Button Content="Поиск" Click="SearchProducts_Click" Grid.Row="0" Grid.Column="5" Margin="10"/>
+        <Button Content="Очистить" Click="ClearProducts_Click" Grid.Row="0" Grid.Column="6" Margin="10"/>
 
         <ListBox x:Name="lstSearchResults" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="6" DisplayMemberPath="{Binding Path=name, StringFormat='{}{0} - {1} - {2} - {3} - {4}'}" Margin="10,10,10,10" Height="200"/>
         <ListBox x:Name="lstCart" Grid.Row="2" Grid.ColumnSpan="6" Height="156" Margin="10,0,10,0" VerticalAlignment="Center"/>
-        <Button Content="Добавить в корзину" Grid.Row="1" Grid.Column="7" Click="AddToCart_Click" Margin="28,10,28,10"/>
-        <Button Content="Оформить" Grid.Row="2" Grid.Column="7" Click="PlaceOrder_Click" Margin="28,10,28,10"/>
+        <Button Content="Добавить" Grid.Row="1" Grid.Column="6" Click="AddToCart_Click" Margin="5,177,15,10"/>
+        <Button Content="Оформить" Grid.Row="2" Grid.Column="5" Click="PlaceOrder_Click" Margin="75,128,15,0" Grid.ColumnSpan="2"/>
     </Grid>
 </Window>

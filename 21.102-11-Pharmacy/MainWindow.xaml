@@ -12,8 +12,7 @@
             <TextBox Name="txtLogin" Width="224" Height="20"/>
             <TextBlock Text="Пароль:" Width="224"/>
             <PasswordBox x:Name="txtPassword" Width="224" Height="20"></PasswordBox>
-            <TextBlock Name="textBlockCaptcha" Width="224" Height="20"/>
-            <TextBox x:Name="txtCaptcha" Width="224" Height="20"/>
+           
             <TextBlock x:Name="seconds" Width="224" Foreground="#FF0000"/>
             <StackPanel Orientation="Horizontal" Height="61" HorizontalAlignment="Center">
                 <Button Name="btnEnter" Margin="5, 15, 5, 5" Content="Войти" Click="btnEnter_Click" Width="159" Height="34"/>
