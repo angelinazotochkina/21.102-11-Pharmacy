@@ -48,41 +48,75 @@ namespace _21._102_11_Pharmacy
 
         private void AddEmployee_Click(object sender, RoutedEventArgs e)
         {
-            // Проверка наличия всех необходимых данных
+            
             if (string.IsNullOrEmpty(txtName.Text) || string.IsNullOrEmpty(txtSurname.Text) ||
                 string.IsNullOrEmpty(txtPositionId.Text) || string.IsNullOrEmpty(txtContactInfo.Text) ||
                 string.IsNullOrEmpty(txtPassportSeries.Text) || string.IsNullOrEmpty(txtPassportNumber.Text))
             {
-                MessageBox.Show("Please fill in all fields.");
+                MessageBox.Show("Заполните все поля");
                 return;
             }
-
-            // Проверка формата данных, например, для Position ID
-            if (!int.TryParse(txtPositionId.Text, out _))
+            if (!int.TryParse(txtPositionId.Text, out int positionId))
             {
-                MessageBox.Show("Invalid Position ID. Please enter a valid integer.");
+                MessageBox.Show("Неверный формат введния идентификатора должности");
+                return;
+            }
+            if (txtPassportSeries.Text.Length > 4 || txtPassportNumber.Text.Length > 6)
+            {
+                MessageBox.Show("Серия папсорта должна содержать не более 4-х символов, а номер не более 6");
                 return;
             }
 
-            // Логика добавления нового сотрудника в базу данных
-            employees newEmployee = new employees
-            {   user_id= int.Parse(txtUserId.Text),
-                name = txtName.Text,
-                surname = txtSurname.Text,
-                patronymic = txtPatronymic.Text,
-                position_id = int.Parse(txtPositionId.Text),
-                phone_number = txtContactInfo.Text,
-                passport_series = txtPassportSeries.Text,
-                passport_number = txtPassportNumber.Text,
-            };
 
             using (var db = new Entities())
             {
-                db.employees.Add(newEmployee);
-                db.SaveChanges();
-                LoadEmployeesData();
-            }
+                // Проверка position_id
+                var existingPositions = db.positions.Select(p => p.position_id).ToList();
+                if (!existingPositions.Contains(positionId))
+                {
+                    MessageBox.Show("Specified Position ID does not exist. Please enter a valid one.");
+                    return;
+                }
+                
+            
+            
+                int userId = int.Parse(txtUserId.Text);
+               
+                 var existingUser = db.users.FirstOrDefault(u => u.user_id == userId);
+                if (existingUser == null)
+                {
+                    MessageBox.Show("User with the specified User ID does not exist. Please enter a valid User ID.");
+                    return;
+                } 
+                var existingUsers = db.employees.Select(emp => emp.user_id).ToList();
+                if (existingUsers.Contains(userId))
+                {
+                    MessageBox.Show("Employee with the specified User ID already exists. Please choose a different User ID.");
+                    return;
+                }
 
+
+
+                // Логика добавления нового сотрудника в базу данных
+                employees newEmployee = new employees
+                {
+                    user_id = int.Parse(txtUserId.Text),
+                    name = txtName.Text,
+                    surname = txtSurname.Text,
+                    patronymic = txtPatronymic.Text,
+                    position_id = int.Parse(txtPositionId.Text),
+                    phone_number = txtContactInfo.Text,
+                    passport_series = txtPassportSeries.Text,
+                    passport_number = txtPassportNumber.Text,
+                    
+                    
+                    
+                };
+
+              db.employees.Add(newEmployee);
+                    db.SaveChanges();
+                    LoadEmployeesData();
+            }
             
         }
 
@@ -112,7 +146,7 @@ namespace _21._102_11_Pharmacy
             {
                 employees selectedEmployee = (employees)EmployeesDataGrid.SelectedItem;
 
-                // Получаем обновленные данные из текстовых полей
+               
                 selectedEmployee.name = txtName.Text;
                 selectedEmployee.surname = txtSurname.Text;
                 selectedEmployee.patronymic = txtPatronymic.Text;
@@ -123,11 +157,11 @@ namespace _21._102_11_Pharmacy
 
                 using (var db = new Entities())
                 {
-                    // Обновляем данные о сотруднике в базе данных
+                   
                     db.Entry(selectedEmployee).State = EntityState.Modified;
                     db.SaveChanges();
 
-                    // Перезагружаем данные в DataGrid
+                    
                     LoadEmployeesData();
                 }
 
@@ -158,7 +192,7 @@ namespace _21._102_11_Pharmacy
 
         private void SearchButton_Click(object sender, RoutedEventArgs e)
         {
-            string searchTerm = txtSearch.Text.Trim(); // Значение поискового запроса
+            string searchTerm = txtSearch.Text.Trim(); 
             SearchEmployees(searchTerm);
         }
 
