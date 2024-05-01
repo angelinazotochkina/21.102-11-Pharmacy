@@ -55,7 +55,7 @@ namespace _21._102_11_Pharmacy
                     maxPrice = int.MaxValue; // По умолчанию максимальное значение
                 }
 
-                // Фильтрация продуктов с помощью LINQ
+                // Фильтрация продуктов 
                 var filteredProducts = db.pharmacyproducts
                     .Where(p => string.IsNullOrEmpty(searchKeyword) || p.name.Contains(searchKeyword))
                     .Where(p => selectedCategory == null || p.category == selectedCategory)

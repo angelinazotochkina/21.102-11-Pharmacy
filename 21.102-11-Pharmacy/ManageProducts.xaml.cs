@@ -1,5 +1,7 @@
 ﻿using _21._102_11_Pharmacy.Model;
 using System;
+using System.Data;
+using System.Data.Entity.Validation;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
@@ -22,6 +24,30 @@ namespace _21._102_11_Pharmacy
                 PharmacyProductsDataGrid.ItemsSource = pharmacyProducts;
             }
         }
+        private bool ValidateInput()
+        {
+            if (string.IsNullOrEmpty(txtName.Text) || string.IsNullOrEmpty(txtCategory.Text) || string.IsNullOrEmpty(txtManufacturer.Text) || string.IsNullOrEmpty(txtPrice.Text) || string.IsNullOrEmpty(txtStatus.Text) || string.IsNullOrEmpty(txtQuantity.Text) || string.IsNullOrEmpty(txtDescription.Text))
+            {
+                MessageBox.Show("Please fill in all fields.");
+                return false;
+            }
+
+            decimal price;
+            if (!decimal.TryParse(txtPrice.Text, out price))
+            {
+                MessageBox.Show("Invalid Price. Please enter a valid decimal number.");
+                return false;
+            }
+
+            int quantity;
+            if (!int.TryParse(txtQuantity.Text, out quantity))
+            {
+                MessageBox.Show("Invalid Quantity. Please enter a valid integer.");
+                return false;
+            }
+
+            return true;
+        }
 
         private void UpdatePharmacyProduct_Click(object sender, RoutedEventArgs e)
         {
@@ -37,46 +63,79 @@ namespace _21._102_11_Pharmacy
                 txtStatus.Text = selectedProduct.status;
                 txtQuantity.Text = selectedProduct.stock_quantity.ToString();
                 txtDescription.Text = selectedProduct.description;
+                txtArticle.Text = selectedProduct.article_number;
             }
         }
 
         private void AddPharmacyProduct_Click(object sender, RoutedEventArgs e)
         {
-            using (var db = new Entities())
+            if (!ValidateInput())
             {
-                pharmacyproducts newProduct = new pharmacyproducts
-                {
-                    name = txtName.Text,
-                    category = txtCategory.Text,
-                    manufacturer = txtManufacturer.Text,
-                    price = Convert.ToDecimal(txtPrice.Text),
-                    status = txtStatus.Text,
-                    stock_quantity = Convert.ToInt32(txtQuantity.Text),
-                    description = txtDescription.Text
-                };
+                return;
+            }
 
-                db.pharmacyproducts.Add(newProduct);
-                db.SaveChanges();
-                LoadProductsData(); // Обновление отображения данных
+            try
+            {
+                using (var db = new Entities())
+                {
+                    pharmacyproducts newProduct = new pharmacyproducts
+                    {
+                        name = txtName.Text,
+                        category = txtCategory.Text,
+                        manufacturer = txtManufacturer.Text,
+                        price = Decimal.Parse(txtPrice.Text), 
+                        status = txtStatus.Text,
+                        stock_quantity = int.Parse(txtQuantity.Text),
+                        description = txtDescription.Text,
+                        article_number= txtArticle.Text
+                    };
+
+                    db.pharmacyproducts.Add(newProduct);
+                    db.SaveChanges();
+                    LoadProductsData(); 
+                }
+            }
+            catch (DbEntityValidationException ex)
+            {
+                foreach (var validationErrors in ex.EntityValidationErrors)
+                {
+                    foreach (var validationError in validationErrors.ValidationErrors)
+                    {
+                        MessageBox.Show($"Property: {validationError.PropertyName} Error: {validationError.ErrorMessage}");
+                    }
+                }
             }
         }
 
         private void DeletePharmacyProduct_Click(object sender, RoutedEventArgs e)
         {
-            using (var db = new Entities())
+            try
             {
-                if (PharmacyProductsDataGrid.SelectedItem != null)
+                using (var db = new Entities())
                 {
-                    pharmacyproducts selectedProduct = (pharmacyproducts)PharmacyProductsDataGrid.SelectedItem;
-                    db.pharmacyproducts.Remove(selectedProduct);
-                    db.SaveChanges();
-                    LoadProductsData(); // Обновление отображения данных
+                    if (PharmacyProductsDataGrid.SelectedItem != null)
+                    {
+                        pharmacyproducts selectedProduct = (pharmacyproducts)PharmacyProductsDataGrid.SelectedItem;
+                        db.Entry(selectedProduct).State = EntityState.Deleted;
+                        db.SaveChanges();
+                        LoadProductsData(); 
+                    }
                 }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Произошла ошибка при удалении продукта: {ex.Message}");
             }
         }
 
         private void SavePharmacyProduct_Click(object sender, RoutedEventArgs e)
         {
+            if (!ValidateInput())
+            {
+                return;
+            }
+
+
             using (var db = new Entities())
             {
                 db.SaveChanges();
@@ -112,5 +171,19 @@ namespace _21._102_11_Pharmacy
             admin.Show();
             Close();
         }
+
+        private void ClearFields_Click(object sender, RoutedEventArgs e)
+        {
+            txtName.Text = "";
+            txtCategory.Text = "";
+            txtManufacturer.Text = "";
+            txtPrice.Text = "";
+            txtStatus.Text = "";
+            txtQuantity.Text = "";
+            txtDescription.Text = "";
+            txtArticle.Text = "";
+        }
+
+
     }
 }

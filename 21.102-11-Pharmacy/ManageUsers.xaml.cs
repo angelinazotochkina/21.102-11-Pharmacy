@@ -40,13 +40,13 @@ namespace _21._102_11_Pharmacy
         {
             if (string.IsNullOrEmpty(txtUsername.Text) || string.IsNullOrEmpty(txtPassword.Text) || string.IsNullOrEmpty(txtRoleId.Text))
             {
-                MessageBox.Show("Please fill in all fields.");
+                MessageBox.Show("Пожалуйста заполните все поля");
                 return;
             }
 
-            if (!int.TryParse(txtRoleId.Text, out _))
+            if (!int.TryParse(txtRoleId.Text, out int roleId) || !IsRoleIdValid(roleId))
             {
-                MessageBox.Show("Invalid Role ID. Please enter a valid integer.");
+                MessageBox.Show("Недействительный идентификатор роли пользователя. Пожалуйста, введите существующий role_id.");
                 return;
             }
 
@@ -68,7 +68,14 @@ namespace _21._102_11_Pharmacy
             txtPassword.Text = "";
             txtRoleId.Text = "";
         }
-
+        private bool IsRoleIdValid(int roleId)
+        {
+            using (var db = new Entities())
+            {
+                var existingRoles = db.users.Select(u => u.role_id).Distinct().ToList();
+                return existingRoles.Contains(roleId);
+            }
+        }
         private void DeleteUser_Click(object sender, RoutedEventArgs e)
         {
             if (UsersDataGrid.SelectedItem != null)
@@ -94,6 +101,12 @@ namespace _21._102_11_Pharmacy
             {
                 users selectedUser = (users)UsersDataGrid.SelectedItem;
 
+                if (!int.TryParse(txtRoleId.Text, out int roleId) || !IsRoleIdValid(roleId))
+                {
+                    MessageBox.Show("Недействительный идентификатор роли пользователя. Пожалуйста, введите существующий role_id.");
+                    return;
+                }
+
                 selectedUser.login = txtUsername.Text;
                 selectedUser.password = txtPassword.Text;
                 selectedUser.role_id = int.Parse(txtRoleId.Text);
@@ -105,11 +118,11 @@ namespace _21._102_11_Pharmacy
                     LoadUsersData();
                 }
 
-                MessageBox.Show("User updated successfully!");
+                MessageBox.Show("Успешно обновлено");
             }
             else
             {
-                MessageBox.Show("Please select a user to update.");
+                MessageBox.Show("Выберите пользователя для редактирования");
             }
         }
 
@@ -117,15 +130,17 @@ namespace _21._102_11_Pharmacy
         {
             using (var db = new Entities())
             {
+                int roleIdSearchTerm;
+                bool isInteger = int.TryParse(searchTerm, out roleIdSearchTerm);
+
                 var searchResults = db.users.Where(u =>
-                    u.login.Contains(searchTerm) 
-                    //u.role_id.ToInt32().Contains(searchTerm)
+                    u.login.Contains(searchTerm) ||
+                    (isInteger && u.role_id == roleIdSearchTerm)
                 ).ToList();
 
                 UsersDataGrid.ItemsSource = searchResults;
             }
         }
-
         private void SearchButton_Click(object sender, RoutedEventArgs e)
         {
             string searchTerm = txtSearch.Text.Trim();
@@ -137,6 +152,13 @@ namespace _21._102_11_Pharmacy
              AdminWindow admin = new AdminWindow();
            admin.Show();
             Close();
+        }
+
+        private void ClearFields_Click(object sender, RoutedEventArgs e)
+        {
+            txtUsername.Text = "";
+            txtPassword.Text = "";
+            txtRoleId.Text = "";
         }
     }
 }

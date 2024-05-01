@@ -83,15 +83,7 @@ namespace _21._102_11_Pharmacy
                 LoadEmployeesData();
             }
 
-            // Очистка полей после добавления
-            txtName.Text = "";
-            txtSurname.Text = "";
-            txtPatronymic.Text = "";
-            txtPositionId.Text = "";
-            txtContactInfo.Text = "";
-            txtPassportSeries.Text = "";
-            txtPassportNumber.Text = "";
-            txtUserId.Text = "";
+            
         }
 
         private void DeleteEmployee_Click(object sender, RoutedEventArgs e)
@@ -175,6 +167,19 @@ namespace _21._102_11_Pharmacy
             AdminWindow admin = new AdminWindow();
             admin.Show();
             Close();
+        }
+
+        private void ClearFields_Click(object sender, RoutedEventArgs e)
+        {
+      
+            txtName.Text = "";
+            txtSurname.Text = "";
+            txtPatronymic.Text = "";
+            txtPositionId.Text = "";
+            txtContactInfo.Text = "";
+            txtPassportSeries.Text = "";
+            txtPassportNumber.Text = "";
+            txtUserId.Text = "";
         }
     }
 }

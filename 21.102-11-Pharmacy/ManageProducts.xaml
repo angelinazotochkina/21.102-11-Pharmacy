@@ -49,8 +49,9 @@
         <Button Content="Поиск" Click="SearchButton_Click" Grid.Column="0" Margin="24,2,24,12" Grid.Row="2" />
         <Button Content="Добавить" Click="AddPharmacyProduct_Click" Grid.Column="1" Margin="24,2,24,12" Grid.Row="2" />
         <Button Content="Обновить" Click="UpdatePharmacyProduct_Click" Grid.Column="2" Margin="24,0,24,10" Grid.Row="2" />
-        <Button Content="Сохранить" Click="SavePharmacyProduct_Click" Grid.Column="3" Margin="38,2,10,8" Grid.Row="2" Grid.ColumnSpan="3" />
-        <Button Content="Удалить" Click="DeletePharmacyProduct_Click" Margin="10,0,0,12" Grid.Row="2" Grid.Column="6" HorizontalAlignment="Left" Width="88" />
+        <Button Content="Сохранить" Click="SavePharmacyProduct_Click" Grid.Column="3" Margin="20,0,28,10" Grid.Row="2" Grid.ColumnSpan="3" />
+        <Button Content="Удалить" Click="DeletePharmacyProduct_Click" Margin="0,2,0,10" Grid.Row="2" Grid.Column="6" HorizontalAlignment="Left" Width="88" />
+        <Button Content="Очистить" Click="ClearFields_Click" Grid.Column="6" Margin="104,2,-59,8" Grid.Row="2"/>
         <Button Content="Назад" Click="ButtonBack_Click" Margin="10,11,0,-9" Grid.Row="6" Grid.Column="6" HorizontalAlignment="Left" Width="88" />
 
         <Label Content="Наименование:" Grid.Row="3"/>
@@ -68,11 +69,15 @@
         <Label Content="Статус:" Grid.Row="5" Grid.Column="0"/>
         <TextBox x:Name="txtStatus" Grid.Row="6" Grid.Column="0" Margin="10,0,10,0" />
 
-        <Label Content="Quantity:" Grid.Row="5" Grid.Column="1"/>
+        <Label Content="Количество:" Grid.Row="5" Grid.Column="1"/>
         <TextBox x:Name="txtQuantity" Grid.Row="6" Grid.Column="1" Margin="10,0,10,0" />
 
         <Label Content="Описание:" Grid.Row="5" Grid.Column="2"/>
         <TextBox x:Name="txtDescription" Grid.Row="6" Grid.Column="2" Margin="10,0,10,0" />
+
+        <Label Content="Артикул:" Grid.Row="3" Grid.Column="6" Margin="4,0,36,0"/>
+        <TextBox x:Name="txtArticle" Grid.Row="4" Grid.Column="6" Margin="4,0,-14,0" />
+
 
     </Grid>
 </Window>

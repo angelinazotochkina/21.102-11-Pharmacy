@@ -34,11 +34,12 @@
                 <DataGridTextColumn Header="Role ID" Binding="{Binding role_id}" />
             </DataGrid.Columns>
         </DataGrid>
-        <Button Content="Search" Click="SearchButton_Click" Grid.Column="0" Margin="24,2,24,12" Grid.Row="2" />
-        <Button Content="Add" Click="AddUser_Click" Grid.Column="1" Margin="24,2,24,12" Grid.Row="2" />
-        <Button Content="Update" Click="UpdateUser_Click" Grid.Column="2" Margin="24,0,24,10" Grid.Row="2" />
-        <Button Content="Save" Click="SaveUser_Click" Grid.Column="3" Margin="24,0,24,10" Grid.Row="2" />
-        <Button Content="Delete" Click="DeleteUser_Click" Margin="10,0,0,12" Grid.Row="2" Grid.Column="6" HorizontalAlignment="Left" Width="88" />
+        <Button Content="Поиск" Click="SearchButton_Click" Grid.Column="0" Margin="24,2,24,12" Grid.Row="2" />
+        <Button Content="Добавить" Click="AddUser_Click" Grid.Column="1" Margin="24,2,24,12" Grid.Row="2" />
+        <Button Content="Обновить" Click="UpdateUser_Click" Grid.Column="2" Margin="24,0,24,10" Grid.Row="2" />
+        <Button Content="Сохранить" Click="SaveUser_Click" Grid.Column="3" Margin="24,0,24,10" Grid.Row="2" />
+        <Button Content="Очистить" Click="ClearFields_Click" Grid.Column="5" Margin="0,198,5,12" Grid.Row="1" Grid.RowSpan="2"/>
+        <Button Content="Удалить" Click="DeleteUser_Click" Margin="10,0,0,12" Grid.Row="2" Grid.Column="6" HorizontalAlignment="Left" Width="88" />
 
         <Label Content="Username:" Grid.Row="3"/>
         <TextBox x:Name="txtUsername" Grid.Row="4" Margin="10,0,10,0" />
@@ -48,7 +49,7 @@
 
         <Label Content="Role ID:" Grid.Row="3" Grid.Column="2"/>
         <TextBox x:Name="txtRoleId" Grid.Row="4" Grid.Column="2" Margin="10,0,10,0" />
-        <Button Content="Назад" Click="ButtonBack_Click" Margin="10,11,0,0" Grid.Row="6" Grid.Column="6" HorizontalAlignment="Left" Width="88" Height="28" VerticalAlignment="Top" />
+        <Button Content="Назад" Click="ButtonBack_Click" Margin="10,0,0,0" Grid.Row="6" Grid.Column="6" HorizontalAlignment="Left" Width="88" Height="28" VerticalAlignment="Center" />
 
     </Grid>
 </Window>
