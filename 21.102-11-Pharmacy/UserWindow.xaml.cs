@@ -194,6 +194,13 @@ namespace _21._102_11_Pharmacy
 
             return orderCode;
         }
+
+        private void logOut_Click(object sender, RoutedEventArgs e)
+        {
+            MainWindow main = new MainWindow();
+            main.Show();
+            Close();
+        }
     }
 }
     

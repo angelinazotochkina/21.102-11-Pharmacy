@@ -19,6 +19,8 @@
             </StackPanel>
             <Label x:Name="lblMessage" Grid.Row="5" />
         </StackPanel>
-        <Button Name="btnSkip" Margin="615,377,26,23" Content="Пропустить" Click="btnSkip_Click" Width="159" Height="34"/>
+        <!--
+<Button Name="btnSkip" Margin="550,333,91,67" Content="Пропустить" Click="btnSkip_Click" Width="159" Height="34"/>
+-->
     </Grid>
 </Window>

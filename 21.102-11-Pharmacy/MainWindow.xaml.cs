@@ -88,9 +88,9 @@ namespace _21._102_11_Pharmacy
         } 
         public void btnSkip_Click(object sender, RoutedEventArgs e)
             {
-              //  UserWindow userWindow = new UserWindow();
-             //   userWindow.Show();
-              //  Close();
+             // UserWindow userWindow = new UserWindow();
+              //userWindow.Show();
+              // Close();
             }
     }
 }

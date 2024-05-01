@@ -9,18 +9,21 @@
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="60"/>
-            <RowDefinition Height="auto"/>
+            <RowDefinition Height="200"/>
             <RowDefinition Height="auto"/>
 
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="150"/>
-            <ColumnDefinition Width="170"/>
-            <ColumnDefinition Width="170"/>
+            <ColumnDefinition Width="200"/>
+            <ColumnDefinition Width="200"/>
+            <ColumnDefinition Width="200"/>
+            <ColumnDefinition Width="200"/>
         </Grid.ColumnDefinitions>
-        <Button Content="Лекарства" Click="GoToManagePharmacyProducts_Click" Grid.Row="0" Grid.Column="1" Margin="10"/>
-        
-        <Button Content="Пользователи" Click="GoToManageUsers_Click" Grid.Row="0" Grid.Column="0" Margin="10"/>
-        <Button Name="ManageEmployees" Content="Сотрудники" Click="ManageEmployees_Click" Grid.Row="0" Grid.Column="2"   Margin="10"/>
+        <Button Content="Лекарства" Click="GoToManagePharmacyProducts_Click" Grid.Row="1" Grid.Column="1" Margin="24,98,24,45"/>
+
+        <Button Content="Пользователи" Click="GoToManageUsers_Click" Grid.Row="1" Grid.Column="0" Margin="39,96,10,43"/>
+        <Button Name="ManageEmployees" Content="Сотрудники" Click="ManageEmployees_Click" Grid.Row="1" Grid.Column="2"   Margin="10,96,0,39"/>
+        <Button Name="logOut" Content="Выход" Click="logOut_Click" Grid.Row="2" Grid.Column="3"   Margin="53,115,10,-150"/>
+        <Label Content="Администрирование системы" HorizontalAlignment="Left" Margin="39,0,0,0" VerticalAlignment="Center" FontSize="28" Grid.ColumnSpan="3" Height="60" Width="433"/>
     </Grid>
 </Window>
